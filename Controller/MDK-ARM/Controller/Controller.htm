@@ -3,7 +3,7 @@
 <title>Static Call Graph - [Controller\Controller.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image Controller\Controller.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6210000: Last Updated: Fri Jul 19 19:50:12 2024
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6210000: Last Updated: Fri Jul 19 20:22:23 2024
 <BR><P>
 <H3>Maximum Stack Usage =        168 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -482,9 +482,9 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_SendCmd
 </UL>
-<BR>[Called By]<UL><LI><a href="#[64]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-<LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pid_app_red_line
+<BR>[Called By]<UL><LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pid_app_red_line
 <LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pid_application
+<LI><a href="#[64]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
 <P><STRONG><a name="[a0]"></a>Error_Handler</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, main.o(.text.Error_Handler))
@@ -539,9 +539,8 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[af]"></a>HAL_GPIO_TogglePin</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, stm32f4xx_hal_gpio.o(.text.HAL_GPIO_TogglePin))
-<BR><BR>[Called By]<UL><LI><a href="#[64]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-<LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;comm_waiting_number
-<LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pid_application
+<BR><BR>[Called By]<UL><LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;comm_waiting_number
+<LI><a href="#[64]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
 <P><STRONG><a name="[9e]"></a>HAL_GPIO_WritePin</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, stm32f4xx_hal_gpio.o(.text.HAL_GPIO_WritePin))
@@ -550,12 +549,12 @@ Global Symbols
 
 <P><STRONG><a name="[76]"></a>HAL_GetTick</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, stm32f4xx_hal.o(.text.HAL_GetTick))
 <BR><BR>[Called By]<UL><LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_DMA_Abort
+<LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Delay
+<LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;comm_waiting_number
 <LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_Transmit
 <LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_ClockConfig
 <LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_PWREx_EnableOverDrive
 <LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_OscConfig
-<LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Delay
-<LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;comm_waiting_number
 <LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pid_application
 </UL>
 
@@ -783,8 +782,8 @@ Global Symbols
 <P><STRONG><a name="[99]"></a>HAL_UART_RxCpltCallback</STRONG> (Thumb, 70 bytes, Stack size 8 bytes, stm32f4xx_it.o(.text.HAL_UART_RxCpltCallback))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = HAL_UART_RxCpltCallback
 </UL>
-<BR>[Calls]<UL><LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_Receive_IT
-<LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;comm_get_date
+<BR>[Calls]<UL><LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;comm_get_date
+<LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_Receive_IT
 </UL>
 <BR>[Called By]<UL><LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_Receive_IT
 </UL>
@@ -959,8 +958,8 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = comm_waiting_number &rArr; usart_SendByte &rArr; HAL_UART_Transmit
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_SendByte
-<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_TogglePin
 <LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GetTick
+<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_TogglePin
 </UL>
 <BR>[Called By]<UL><LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pid_application
 </UL>
@@ -968,7 +967,12 @@ Global Symbols
 <P><STRONG><a name="[64]"></a>main</STRONG> (Thumb, 148 bytes, Stack size 8 bytes, main.o(.text.main))
 <BR><BR>[Stack]<UL><LI>Max Depth = 168<LI>Call Chain = main &rArr; pid_application &rArr; pid_app_quarter_turn &rArr; Emm_V5_Pos_Control &rArr; usart_SendCmd &rArr; HAL_UART_Transmit
 </UL>
-<BR>[Calls]<UL><LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_Receive_IT
+<BR>[Calls]<UL><LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pid_application
+<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_TogglePin
+<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;soft_timer_is_timeout
+<LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Emm_V5_Vel_Control
+<LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;soft_timer_init
+<LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_Receive_IT
 <LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_Base_Start_IT
 <LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_USART1_UART_Init
 <LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_USART3_UART_Init
@@ -977,11 +981,6 @@ Global Symbols
 <LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_GPIO_Init
 <LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemClock_Config
 <LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Init
-<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;soft_timer_is_timeout
-<LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;soft_timer_init
-<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_TogglePin
-<LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Emm_V5_Vel_Control
-<LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pid_application
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> entry9a.o(.ARM.Collect$$$$0000000B)
 </UL>
@@ -1012,17 +1011,14 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pid_application
 </UL>
 
-<P><STRONG><a name="[b3]"></a>pid_application</STRONG> (Thumb, 2334 bytes, Stack size 40 bytes, pid_app.o(.text.pid_application))
+<P><STRONG><a name="[b3]"></a>pid_application</STRONG> (Thumb, 2252 bytes, Stack size 40 bytes, pid_app.o(.text.pid_application))
 <BR><BR>[Stack]<UL><LI>Max Depth = 160<LI>Call Chain = pid_application &rArr; pid_app_quarter_turn &rArr; Emm_V5_Pos_Control &rArr; usart_SendCmd &rArr; HAL_UART_Transmit
 </UL>
-<BR>[Calls]<UL><LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_SendByte
-<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_TogglePin
-<LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pid_app_quarter_turn
+<BR>[Calls]<UL><LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pid_app_quarter_turn
 <LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pid_app_red_line
 <LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pid_app_half_turn
 <LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Emm_V5_Pos_Control
 <LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Delay
-<LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Emm_V5_Vel_Control
 <LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Sensor_Ending_Judge
 <LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GetTick
 <LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Sensor_Cross_Judge
@@ -1030,6 +1026,7 @@ Global Symbols
 <LI><a href="#[a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Sensor_Get_State
 <LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;comm_waiting_number
 <LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pid_init
+<LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Emm_V5_Vel_Control
 </UL>
 <BR>[Called By]<UL><LI><a href="#[64]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
@@ -1065,7 +1062,6 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_Transmit
 </UL>
 <BR>[Called By]<UL><LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;comm_waiting_number
-<LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pid_application
 </UL>
 
 <P><STRONG><a name="[73]"></a>usart_SendCmd</STRONG> (Thumb, 78 bytes, Stack size 24 bytes, usart.o(.text.usart_SendCmd))

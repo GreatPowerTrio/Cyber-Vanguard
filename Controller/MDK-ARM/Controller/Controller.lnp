@@ -1,12 +1,12 @@
 --cpu=Cortex-M4.fp.sp
 "controller\startup_stm32f429xx.o"
+"controller\main.o"
 "controller\pid.o"
 "controller\pid_app.o"
 "controller\sensors.o"
 "controller\timer.o"
 "controller\motors.o"
 "controller\comm.o"
-"controller\main.o"
 "controller\gpio.o"
 "controller\tim.o"
 "controller\usart.o"

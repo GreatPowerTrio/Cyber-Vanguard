@@ -141,7 +141,6 @@ void pid_application(void)
             /* 获取识别到的初始数字信息 */
             dest_number = comm_message.left_number;
             status = _WAITING_LOADING;
-
         }
 #else
         // dest_number = '5';
@@ -797,7 +796,6 @@ void pid_application(void)
     }
     
 }
-
 /**
   * @brief 加速度平滑处理，防止小车磕头，在巡红线环处调用
   */
@@ -815,6 +813,20 @@ void pid_acc_reset(void)
 }
 
 /**
+  * @brief pid参数初始化
+  */
+void pid_app_init(void)
+{
+    // 电机默认设置参考README.md
+    // 初始化左右电机，右边电机pid参数是相反的
+    pid_init(&motorL_pid, kp, ki, kd);
+    motorL_pid.pid_params_init(&motorL_pid, output_max, output_min, integral_max, integral_min);
+
+    pid_init(&motorR_pid, -kp, -ki, -kd);
+    motorR_pid.pid_params_init(&motorR_pid, output_max, output_min, integral_max, integral_min);
+}
+
+/**
   * @brief 开启转向环
   */
 void pid_app_red_line(void)
@@ -827,20 +839,6 @@ void pid_app_red_line(void)
     // 右电机
     resultR = motorR_pid.pid_params_compute(&motorR_pid, target, mearsure);
     Emm_V5_Vel_Control(2, 0, speed + resultR, acc, false, &huart2);  
-}
-
-/**
-  * @brief pid参数初始化
-  */
-void pid_app_init(void)
-{
-    // 电机默认设置参考Motor.c
-    // 初始化左右电机，右边电机pid参数是相反的
-    pid_init(&motorL_pid, kp, ki, kd);
-    motorL_pid.pid_params_init(&motorL_pid, output_max, output_min, integral_max, integral_min);
-
-    pid_init(&motorR_pid, -kp, -ki, -kd);
-    motorR_pid.pid_params_init(&motorR_pid, output_max, output_min, integral_max, integral_min);
 }
 
 
@@ -867,7 +865,6 @@ void pid_app_half_turn(void)
     HAL_Delay(TIME_STOP_AFTER_HALF_TURN);
 }
 
-
 /**
   * @brief 串口调试程序
   */
@@ -883,7 +880,6 @@ void pid_uart_test(void)
 
         _END,
     } status_t;
-
 
     static status_t status = _INIT;
 
@@ -906,7 +902,6 @@ void pid_uart_test(void)
 
         status = _WAITING_SECOND_NUMBER;
 
-
         usart_SendByte(comm_message.left_number, &huart3);
         usart_SendByte(comm_message.right_number,&huart3);
         usart_SendByte('\r', &huart3);
@@ -927,7 +922,6 @@ void pid_uart_test(void)
         break;
 
     case _DEAL2:
-
 
         usart_SendByte(comm_message.left_number, &huart3);
         usart_SendByte(comm_message.right_number,&huart3);

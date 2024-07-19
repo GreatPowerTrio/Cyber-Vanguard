@@ -6,20 +6,19 @@
 
 char comm_string[LENGTH];
 
-
-
+/* 标志位，在中断中设置 */
 bool comm_number_flag;
-
-
 bool comm_load_flag;
 
 number_message comm_message;
 
 
-
+/**
+  * @brief 在串口中断中使用，用于接收识别到的数字信息
+  */
 void comm_get_date(uint8_t data)
 {
-
+  /* 发送格式：(xx)\r\n */
   static uint8_t comm_pointer = 0;
 
   comm_string[comm_pointer++] = data;
@@ -40,9 +39,9 @@ void comm_get_date(uint8_t data)
 
 }
 
-
 /**
   * @brief 等待数字识别，标志位在串口中断中使用
+  * @retval 在一定时刻识别到后返回true，否则返回false
   */
 bool comm_waiting_number(void)
 {
@@ -84,12 +83,9 @@ bool comm_waiting_number(void)
       status = _INIT;
 
     break;
-
-
   default:
     break;
   }
-
 
   return false;
 }

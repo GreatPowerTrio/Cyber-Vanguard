@@ -117,14 +117,11 @@ int main(void)
     {
       HAL_GPIO_TogglePin(LED1_GPIO_Port, LED1_Pin);
     }
-
     if(soft_timer_is_timeout(SOFT_TIMER1))
     {     
       pid_application();
       // pid_uart_test();
-
     }
-
 
     /* USER CODE END WHILE */
 

@@ -265,7 +265,9 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* uartHandle)
 
 /* USER CODE BEGIN 1 */
 
-
+/**
+  * @brief Send bytes by huart.
+  */
 void usart_SendCmd(uint8_t *cmd, uint8_t len, UART_HandleTypeDef *huart)
 {
 	__IO uint8_t i = 0;
@@ -275,7 +277,9 @@ void usart_SendCmd(uint8_t *cmd, uint8_t len, UART_HandleTypeDef *huart)
 }
 
 
-
+/**
+  * @brief Send one byte by huart.
+  */
 void usart_SendByte(uint8_t data, UART_HandleTypeDef *huart)
 {
   uint8_t temp = data;

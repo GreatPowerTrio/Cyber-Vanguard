@@ -269,8 +269,6 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 
   if(huart->Instance == USART3)
   {
-    // HAL_UART_Transmit(&huart3, &recData, 1, 0xFFFF);
-
     if(comm_number_flag == false)
       comm_get_date(recData);
 
