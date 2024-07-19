@@ -129,6 +129,11 @@ def four_point_transform(image, pts):
     # 返回变换后的图像
     return warped
 
+def main():
+    
+    print("load num_detect module successfully")
+    print("*******************************************")
+
 
 if __name__ == 'main':
-    print("This is num module")
+    main()

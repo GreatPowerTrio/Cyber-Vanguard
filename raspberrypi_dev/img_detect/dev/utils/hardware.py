@@ -42,6 +42,9 @@ def UART_read(ser):
         message = None
     return message
 
-
+def main():
+    print("load hardware module successfully")
+    print("*******************************************")
+    
 if __name__ == 'main':
-    print("This is hardware module")
+    main()
