@@ -1,0 +1,5 @@
+numpy
+opencv-python
+RPi.GPIO
+pyserial
+pillow
