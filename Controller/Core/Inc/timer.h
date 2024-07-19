@@ -18,6 +18,7 @@ typedef enum
 {   
     SOFT_TIMER0,
     SOFT_TIMER1,
+    SOFT_TIMER2,
     SOFT_TIMER_MAX_SIZE,
 } soft_timer_type;
 

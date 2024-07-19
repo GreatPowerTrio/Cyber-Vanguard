@@ -16,7 +16,7 @@
         <TargetCommonOption>
           <Device>GD32F470ZG</Device>
           <Vendor>GigaDevice</Vendor>
-          <PackID>GigaDevice.GD32F4xx_DFP.3.0.3</PackID>
+          <PackID>GigaDevice.GD32F4xx_DFP.3.2.0</PackID>
           <PackURL>https://gd32mcu.com/data/documents/pack/</PackURL>
           <Cpu>IRAM(0x20000000,0x070000) IRAM2(0x10000000,0x010000) IROM(0x08000000,0x0100000) CPUTYPE("Cortex-M4") FPU2 CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
@@ -395,14 +395,9 @@
           <GroupName>Application/User/Core</GroupName>
           <Files>
             <File>
-              <FileName>motors.c</FileName>
+              <FileName>main.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Core\Src\motors.c</FilePath>
-            </File>
-            <File>
-              <FileName>sensors.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Core\Src\sensors.c</FilePath>
+              <FilePath>../Core/Src/main.c</FilePath>
             </File>
             <File>
               <FileName>pid.c</FileName>
@@ -415,14 +410,24 @@
               <FilePath>..\Core\Src\pid_app.c</FilePath>
             </File>
             <File>
+              <FileName>sensors.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Core\Src\sensors.c</FilePath>
+            </File>
+            <File>
               <FileName>timer.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Core\Src\timer.c</FilePath>
             </File>
             <File>
-              <FileName>main.c</FileName>
+              <FileName>motors.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../Core/Src/main.c</FilePath>
+              <FilePath>..\Core\Src\motors.c</FilePath>
+            </File>
+            <File>
+              <FileName>comm.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Core\Src\comm.c</FilePath>
             </File>
             <File>
               <FileName>gpio.c</FileName>

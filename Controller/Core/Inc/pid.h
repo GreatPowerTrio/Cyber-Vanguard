@@ -1,7 +1,6 @@
 #ifndef _PID_H_
 #define _PID_H_
 
-
 #include "main.h"
 
 // pid使能状态枚举
@@ -53,7 +52,7 @@ typedef struct _pid_params_t
 
 } pid_params_t;
 
-// 链接结构体与函数
+// 链接结构体与函数，并初始化pid参数
 void pid_init(struct _pid_params_t *pid, float _kp, float _ki, float _kd);
 
 //初始化输出和积分限幅，其他参数置零
