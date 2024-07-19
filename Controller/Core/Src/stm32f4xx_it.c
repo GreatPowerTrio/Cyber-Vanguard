@@ -23,6 +23,8 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "timer.h"
+#include "usart.h"
+#include "comm.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -58,6 +60,7 @@
 /* External variables --------------------------------------------------------*/
 extern TIM_HandleTypeDef htim2;
 extern UART_HandleTypeDef huart1;
+extern UART_HandleTypeDef huart3;
 /* USER CODE BEGIN EV */
 
 /* USER CODE END EV */
@@ -206,10 +209,8 @@ void SysTick_Handler(void)
 void EXTI0_IRQHandler(void)
 {
   /* USER CODE BEGIN EXTI0_IRQn 0 */
-  
-  HAL_GPIO_TogglePin(LED2_GPIO_Port, LED2_Pin);
-  Emm_V5_Vel_Control(0, 0, 0, 0, false);
-  while(true);
+
+  comm_load_flag = true;
 
   /* USER CODE END EXTI0_IRQn 0 */
   HAL_GPIO_EXTI_IRQHandler(KEY_Pin);
@@ -248,19 +249,33 @@ void USART1_IRQHandler(void)
   /* USER CODE END USART1_IRQn 1 */
 }
 
-/* USER CODE BEGIN 1 */
+/**
+  * @brief This function handles USART3 global interrupt.
+  */
+void USART3_IRQHandler(void)
+{
+  /* USER CODE BEGIN USART3_IRQn 0 */
 
+  /* USER CODE END USART3_IRQn 0 */
+  HAL_UART_IRQHandler(&huart3);
+  /* USER CODE BEGIN USART3_IRQn 1 */
+
+  /* USER CODE END USART3_IRQn 1 */
+}
+
+/* USER CODE BEGIN 1 */
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
 
-  // 串口回调函数
+  if(huart->Instance == USART3)
+  {
+    // HAL_UART_Transmit(&huart3, &recData, 1, 0xFFFF);
 
-  // HAL_UART_Receive_IT(&huart2, &e_recData, 1); 
-  // if(huart->Instance == USART2)
-  // {
-  //   HAL_UART_Transmit(&huart1, &e_recData, 1, 0);
+    if(comm_number_flag == false)
+      comm_get_date(recData);
 
-  //   HAL_UART_Receive_IT(&huart1, &e_recData, 1);
-  // }
+    HAL_UART_Receive_IT(&huart3, &recData, 1);
+  }
+
 }
 /* USER CODE END 1 */

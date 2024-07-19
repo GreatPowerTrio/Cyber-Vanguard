@@ -15,6 +15,8 @@
 
 /* 
   使用电机：1.8°，16细分，发送3200个脉冲电机转一圈
+  左电机地址2；右电机地址1
+  左电机方向CW；右边电机方向：CCW
  */
 
 
@@ -24,7 +26,7 @@
   * @param    addr  ：电机地址
   * @retval   地址 + 功能码 + 命令状态 + 校验字节
   */
-void Emm_V5_Reset_CurPos_To_Zero(uint8_t addr)
+void Emm_V5_Reset_CurPos_To_Zero(uint8_t addr, UART_HandleTypeDef *huart)
 {
   uint8_t cmd[16] = {0};
   
@@ -35,7 +37,7 @@ void Emm_V5_Reset_CurPos_To_Zero(uint8_t addr)
   cmd[3] =  0x6B;                       // 校验字节
   
   // 发送命令
-  usart_SendCmd(cmd, 4);
+  usart_SendCmd(cmd, 4, huart);
 }
 
 /**
@@ -43,7 +45,7 @@ void Emm_V5_Reset_CurPos_To_Zero(uint8_t addr)
   * @param    addr  ：电机地址
   * @retval   地址 + 功能码 + 命令状态 + 校验字节
   */
-void Emm_V5_Reset_Clog_Pro(uint8_t addr)
+void Emm_V5_Reset_Clog_Pro(uint8_t addr, UART_HandleTypeDef *huart)
 {
   uint8_t cmd[16] = {0};
   
@@ -54,7 +56,7 @@ void Emm_V5_Reset_Clog_Pro(uint8_t addr)
   cmd[3] =  0x6B;                       // 校验字节
   
   // 发送命令
-  usart_SendCmd(cmd, 4);
+  usart_SendCmd(cmd, 4, huart);
 }
 
 /**
@@ -63,7 +65,7 @@ void Emm_V5_Reset_Clog_Pro(uint8_t addr)
   * @param    s     ：系统参数类型
   * @retval   地址 + 功能码 + 命令状态 + 校验字节
   */
-void Emm_V5_Read_Sys_Params(uint8_t addr, SysParams_t s)
+void Emm_V5_Read_Sys_Params(uint8_t addr, SysParams_t s, UART_HandleTypeDef *huart)
 {
   uint8_t i = 0;
   uint8_t cmd[16] = {0};
@@ -93,7 +95,7 @@ void Emm_V5_Read_Sys_Params(uint8_t addr, SysParams_t s)
   cmd[i] = 0x6B; ++i;                   // 校验字节
   
   // 发送命令
-  usart_SendCmd(cmd, i);
+  usart_SendCmd(cmd, i, huart);
 }
 
 /**
@@ -103,7 +105,7 @@ void Emm_V5_Read_Sys_Params(uint8_t addr, SysParams_t s)
   * @param    ctrl_mode：控制模式（对应屏幕上的P_Pul菜单），0是关闭脉冲输入引脚，1是开环模式，2是闭环模式，3是让En端口复用为多圈限位开关输入引脚，Dir端口复用为到位输出高电平功能
   * @retval   地址 + 功能码 + 命令状态 + 校验字节
   */
-void Emm_V5_Modify_Ctrl_Mode(uint8_t addr, bool svF, uint8_t ctrl_mode)
+void Emm_V5_Modify_Ctrl_Mode(uint8_t addr, bool svF, uint8_t ctrl_mode, UART_HandleTypeDef *huart)
 {
   uint8_t cmd[16] = {0};
   
@@ -116,7 +118,7 @@ void Emm_V5_Modify_Ctrl_Mode(uint8_t addr, bool svF, uint8_t ctrl_mode)
   cmd[5] =  0x6B;                       // 校验字节
   
   // 发送命令
-  usart_SendCmd(cmd, 6);
+  usart_SendCmd(cmd, 6, huart);
 }
 
 /**
@@ -126,7 +128,7 @@ void Emm_V5_Modify_Ctrl_Mode(uint8_t addr, bool svF, uint8_t ctrl_mode)
   * @param    snF   ：多机同步标志 ，false为不启用，true为启用
   * @retval   地址 + 功能码 + 命令状态 + 校验字节
   */
-void Emm_V5_En_Control(uint8_t addr, bool state, bool snF)
+void Emm_V5_En_Control(uint8_t addr, bool state, bool snF, UART_HandleTypeDef *huart)
 {
   uint8_t cmd[16] = {0};
   
@@ -139,7 +141,7 @@ void Emm_V5_En_Control(uint8_t addr, bool state, bool snF)
   cmd[5] =  0x6B;                       // 校验字节
   
   // 发送命令
-  usart_SendCmd(cmd, 6);
+  usart_SendCmd(cmd, 6, huart);
 }
 
 /**
@@ -151,7 +153,7 @@ void Emm_V5_En_Control(uint8_t addr, bool state, bool snF)
   * @param    snF ：多机同步标志，false为不启用，true为启用
   * @retval   地址 + 功能码 + 命令状态 + 校验字节
   */
-void Emm_V5_Vel_Control(uint8_t addr, uint8_t dir, uint16_t vel, uint8_t acc, bool snF)
+void Emm_V5_Vel_Control(uint8_t addr, uint8_t dir, uint16_t vel, uint8_t acc, bool snF, UART_HandleTypeDef *huart)
 {
   uint8_t cmd[16] = {0};
 
@@ -166,7 +168,7 @@ void Emm_V5_Vel_Control(uint8_t addr, uint8_t dir, uint16_t vel, uint8_t acc, bo
   cmd[7] =  0x6B;                       // 校验字节
   
   // 发送命令
-  usart_SendCmd(cmd, 8);
+  usart_SendCmd(cmd, 8, huart);
 }
 
 /**
@@ -180,7 +182,7 @@ void Emm_V5_Vel_Control(uint8_t addr, uint8_t dir, uint16_t vel, uint8_t acc, bo
   * @param    snF ：多机同步标志 ，false为不启用，true为启用
   * @retval   地址 + 功能码 + 命令状态 + 校验字节
   */
-void Emm_V5_Pos_Control(uint8_t addr, uint8_t dir, uint16_t vel, uint8_t acc, uint32_t clk, bool raF, bool snF)
+void Emm_V5_Pos_Control(uint8_t addr, uint8_t dir, uint16_t vel, uint8_t acc, uint32_t clk, bool raF, bool snF, UART_HandleTypeDef *huart)
 {
   uint8_t cmd[16] = {0};
 
@@ -200,7 +202,7 @@ void Emm_V5_Pos_Control(uint8_t addr, uint8_t dir, uint16_t vel, uint8_t acc, ui
   cmd[12] =  0x6B;                      // 校验字节
   
   // 发送命令
-  usart_SendCmd(cmd, 13);
+  usart_SendCmd(cmd, 13, huart);
 }
 
 /**
@@ -209,7 +211,7 @@ void Emm_V5_Pos_Control(uint8_t addr, uint8_t dir, uint16_t vel, uint8_t acc, ui
   * @param    snF   ：多机同步标志，false为不启用，true为启用
   * @retval   地址 + 功能码 + 命令状态 + 校验字节
   */
-void Emm_V5_Stop_Now(uint8_t addr, bool snF)
+void Emm_V5_Stop_Now(uint8_t addr, bool snF, UART_HandleTypeDef *huart)
 {
   uint8_t cmd[16] = {0};
   
@@ -221,7 +223,7 @@ void Emm_V5_Stop_Now(uint8_t addr, bool snF)
   cmd[4] =  0x6B;                       // 校验字节
   
   // 发送命令
-  usart_SendCmd(cmd, 5);
+  usart_SendCmd(cmd, 5, huart);
 }
 
 /**
@@ -229,7 +231,7 @@ void Emm_V5_Stop_Now(uint8_t addr, bool snF)
   * @param    addr  ：电机地址
   * @retval   地址 + 功能码 + 命令状态 + 校验字节
   */
-void Emm_V5_Synchronous_motion(uint8_t addr)
+void Emm_V5_Synchronous_motion(uint8_t addr, UART_HandleTypeDef *huart)
 {
   uint8_t cmd[16] = {0};
   
@@ -240,7 +242,7 @@ void Emm_V5_Synchronous_motion(uint8_t addr)
   cmd[3] =  0x6B;                       // 校验字节
   
   // 发送命令
-  usart_SendCmd(cmd, 4);
+  usart_SendCmd(cmd, 4, huart);
 }
 
 /**
@@ -249,7 +251,7 @@ void Emm_V5_Synchronous_motion(uint8_t addr)
   * @param    svF   ：是否存储标志，false为不存储，true为存储
   * @retval   地址 + 功能码 + 命令状态 + 校验字节
   */
-void Emm_V5_Origin_Set_O(uint8_t addr, bool svF)
+void Emm_V5_Origin_Set_O(uint8_t addr, bool svF, UART_HandleTypeDef *huart)
 {
   uint8_t cmd[16] = {0};
   
@@ -261,7 +263,7 @@ void Emm_V5_Origin_Set_O(uint8_t addr, bool svF)
   cmd[4] =  0x6B;                       // 校验字节
   
   // 发送命令
-  usart_SendCmd(cmd, 5);
+  usart_SendCmd(cmd, 5, huart);
 }
 
 /**
@@ -278,7 +280,7 @@ void Emm_V5_Origin_Set_O(uint8_t addr, bool svF)
   * @param    potF   ：上电自动触发回零，false为不使能，true为使能
   * @retval   地址 + 功能码 + 命令状态 + 校验字节
   */
-void Emm_V5_Origin_Modify_Params(uint8_t addr, bool svF, uint8_t o_mode, uint8_t o_dir, uint16_t o_vel, uint32_t o_tm, uint16_t sl_vel, uint16_t sl_ma, uint16_t sl_ms, bool potF)
+void Emm_V5_Origin_Modify_Params(uint8_t addr, bool svF, uint8_t o_mode, uint8_t o_dir, uint16_t o_vel, uint32_t o_tm, uint16_t sl_vel, uint16_t sl_ma, uint16_t sl_ms, bool potF, UART_HandleTypeDef *huart)
 {
   uint8_t cmd[32] = {0};
   
@@ -305,7 +307,7 @@ void Emm_V5_Origin_Modify_Params(uint8_t addr, bool svF, uint8_t o_mode, uint8_t
   cmd[19] =  0x6B;                      // 校验字节
   
   // 发送命令
-  usart_SendCmd(cmd, 20);
+  usart_SendCmd(cmd, 20, huart);
 }
 
 /**
@@ -315,7 +317,7 @@ void Emm_V5_Origin_Modify_Params(uint8_t addr, bool svF, uint8_t o_mode, uint8_t
   * @param    snF   ：多机同步标志，false为不启用，true为启用
   * @retval   地址 + 功能码 + 命令状态 + 校验字节
   */
-void Emm_V5_Origin_Trigger_Return(uint8_t addr, uint8_t o_mode, bool snF)
+void Emm_V5_Origin_Trigger_Return(uint8_t addr, uint8_t o_mode, bool snF, UART_HandleTypeDef *huart)
 {
   uint8_t cmd[16] = {0};
   
@@ -327,7 +329,7 @@ void Emm_V5_Origin_Trigger_Return(uint8_t addr, uint8_t o_mode, bool snF)
   cmd[4] =  0x6B;                       // 校验字节
   
   // 发送命令
-  usart_SendCmd(cmd, 5);
+  usart_SendCmd(cmd, 5, huart);
 }
 
 /**
@@ -335,7 +337,7 @@ void Emm_V5_Origin_Trigger_Return(uint8_t addr, uint8_t o_mode, bool snF)
   * @param    addr  ：电机地址
   * @retval   地址 + 功能码 + 命令状态 + 校验字节
   */
-void Emm_V5_Origin_Interrupt(uint8_t addr)
+void Emm_V5_Origin_Interrupt(uint8_t addr, UART_HandleTypeDef *huart)
 {
   uint8_t cmd[16] = {0};
   
@@ -346,6 +348,6 @@ void Emm_V5_Origin_Interrupt(uint8_t addr)
   cmd[3] =  0x6B;                       // 校验字节
   
   // 发送命令
-  usart_SendCmd(cmd, 4);
+  usart_SendCmd(cmd, 4, huart);
 }
 

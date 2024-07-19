@@ -2,10 +2,8 @@
 #include "sensors.h"
 
 
-
-
 /**
-  * @brief 创建pid_param_t变量后，初始化需要执行的第一个函数，链接外部函数
+  * @brief 创建pid_param_t变量后，初始化需要执行的第一个函数，链接外部函数并初始化pid参数
   * @retval 无
   */
 void pid_init(struct _pid_params_t *pid, float _kp, float _ki, float _kd)
@@ -13,7 +11,6 @@ void pid_init(struct _pid_params_t *pid, float _kp, float _ki, float _kd)
     pid->pid_params_init    = pid_params_init;
     pid->pid_params_control = pid_params_control;
     pid->pid_params_compute = pid_params_compute;
-
 
     pid->kp = _kp;
     pid->ki = _ki;
@@ -72,14 +69,8 @@ float pid_params_compute (struct _pid_params_t *pid, float _target, float _measu
         // 误差 = 目标值 - 测量值
         pid->error = pid->target - pid->measure;
 
-
-        // printf("err: %d \r\n", (int)(pid->error));
-
         /* 计算比例项 */
         pid->kp_out = pid->kp * pid->error;
-
-        // printf("kp:%d kp_out: %d \r\n", (int)(pid->kp), (int)(pid->kp_out));
-
 
         // 计算累计误差
         pid->sum_error = pid->sum_error + pid->error;
@@ -96,7 +87,6 @@ float pid_params_compute (struct _pid_params_t *pid, float _target, float _measu
         pid->kd_out = pid->kd * (pid->error - pid->last_error);
 
         pid->last_error = pid->error;        
-
 
         /* 计算总输出 */
         pid->output = pid->kp_out + pid->ki_out + pid->kd_out;

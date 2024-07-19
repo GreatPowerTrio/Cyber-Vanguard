@@ -48,7 +48,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-
+uint8_t recData;
 
 /* USER CODE END PV */
 
@@ -61,7 +61,6 @@ void SystemClock_Config(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
-uint8_t e_recData;
 
 /* USER CODE END 0 */
 
@@ -94,15 +93,19 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_USART1_UART_Init();
-  MX_USART2_UART_Init();
   MX_TIM2_Init();
+  MX_USART2_UART_Init();
+  MX_USART3_UART_Init();
+  MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT(&htim2);
-  
+
+  HAL_UART_Receive_IT(&huart3, &recData, 1);
 
   soft_timer_init(SOFT_TIMER0, 1000);
   soft_timer_init(SOFT_TIMER1, 20);
+
+  Emm_V5_Vel_Control(0, 0, 0, 0, false, &huart2);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -114,9 +117,12 @@ int main(void)
     {
       HAL_GPIO_TogglePin(LED1_GPIO_Port, LED1_Pin);
     }
+
     if(soft_timer_is_timeout(SOFT_TIMER1))
-    {
-      pid_application_turn();
+    {     
+      pid_application();
+      // pid_uart_test();
+
     }
 
 
@@ -181,9 +187,7 @@ void SystemClock_Config(void)
 
 /* USER CODE BEGIN 4 */
 
-/**
-  * @brief UART1的printf重定向函�?????
-  */
+
 int fputc(int ch, FILE *f)
 {
   uint8_t temp = ch;

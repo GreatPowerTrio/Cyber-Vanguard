@@ -44,7 +44,7 @@ extern "C" {
 
 /* Exported constants --------------------------------------------------------*/
 /* USER CODE BEGIN EC */
-extern uint8_t e_recData;
+extern uint8_t recData;
 /* USER CODE END EC */
 
 /* Exported macro ------------------------------------------------------------*/

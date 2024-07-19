@@ -11,7 +11,11 @@
     "pid_app.h": "c",
     "tim.h": "c",
     "stm32f4xx_it.h": "c",
-    "timer.h": "c"
+    "timer.h": "c",
+    "control.h": "c",
+    "cstdint": "c",
+    "comm.h": "c",
+    "stdbool.h": "c"
   },
   "C_Cpp.default.compilerPath": "D:\\Application\\Keil\\ARM\\ARMCLANG\\Bin",
   "C_Cpp_Runner.cCompilerPath": "gcc",
