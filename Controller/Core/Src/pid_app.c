@@ -515,13 +515,12 @@ void pid_application(void)
             pid_app_red_line();
 
             break;
+            
         case 1: /* 后退一段距离 */
         
 
             Emm_V5_Pos_Control(0, 1, speed, 200, MOTOR_MOVE_BACK, false, false, &huart2);
-#if PID_VERSION_MODE == 0            
             HAL_Delay(1000);            
-#endif
             go_to_3rd_crossing_step++;
             status = _THIRD_JUDGE;
             break;
@@ -541,7 +540,7 @@ void pid_application(void)
             Emm_V5_Pos_Control(1, 0, 200, 200, MOTOR_LITTLE_TURN, false, false, &huart2);
             HAL_Delay(10);
             Emm_V5_Pos_Control(2, 1, 200, 200, MOTOR_LITTLE_TURN, false, false, &huart2);
-
+            HAL_Delay(500);
             third_judge_step++;
             break;
         
@@ -561,11 +560,12 @@ void pid_application(void)
 #endif
             break;
         
-        case 2: /* 向左旋转一定角度 */
+        case 2: /* 向右旋转一定角度 */
 
             Emm_V5_Pos_Control(1, 1, 200, 200, MOTOR_LITTLE_TURN * 2, false, false, &huart2);
             HAL_Delay(10);
             Emm_V5_Pos_Control(2, 0, 200, 200, MOTOR_LITTLE_TURN * 2, false, false, &huart2);
+            HAL_Delay(500);
             third_judge_step++;
             break;
 

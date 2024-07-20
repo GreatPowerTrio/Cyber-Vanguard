@@ -67,7 +67,7 @@ bool comm_waiting_number(void)
   case _DETECT:
 
     HAL_GPIO_TogglePin(LED4_GPIO_Port, LED4_Pin);
-    if(HAL_GetTick() - tick >= 2000)
+    if(HAL_GetTick() - tick >= 1000)
     {
       if(comm_number_flag)
       {

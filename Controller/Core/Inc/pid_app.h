@@ -5,7 +5,7 @@
 #include "main.h"
 
 #define PID_VERSION_MODE 1
-#define PID_LOADING_MODE 0
+#define PID_LOADING_MODE 1
 
 
 #define TIME_STOP_BEFORE_TURN             500
