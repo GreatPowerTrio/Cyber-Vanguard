@@ -40,7 +40,7 @@ def ascill_art(file):
     #im = ImageOps.invert(im)
 
     # 对图片进行降采样
-    sample_rate = 0.4
+    sample_rate = 0.35
 
     # 这段代码可以处理图片拉伸的情况
     font = ImageFont.truetype(osp.join(package_dir,"font/SourceCodePro-Black-1.ttf"))
@@ -69,6 +69,9 @@ def ascill_art(file):
     lines = "\n".join(("".join(r) for r in ascii))
     print(lines)
 
+if __name__!="__main__":
+    main()
 
 if __name__=="__main__":
+    print("Testing the __init__.py")
     main()
