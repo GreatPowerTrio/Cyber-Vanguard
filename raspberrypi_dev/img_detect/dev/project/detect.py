@@ -158,8 +158,6 @@ if __name__ == '__main__':
                     kernel = np.ones((5,5), np.uint8)
 
                     roi_blur = cv2.GaussianBlur(roi, (7, 7), 0)
-    
-                    # 礼帽操作
                     
                     roi_edge = cv2.Canny(roi_blur, 80, 200)
                     roi_eroded = cv2.erode(roi_edge, kernel, iterations=2)
