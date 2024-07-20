@@ -2,4 +2,5 @@ numpy
 opencv-python
 RPi.GPIO
 pyserial
-pillow
+pillow <= 9.4
+rpi-lgpi
