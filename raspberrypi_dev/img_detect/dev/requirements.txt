@@ -1,0 +1,6 @@
+numpy
+opencv-python
+RPi.GPIO
+pyserial
+pillow <= 9.4
+rpi-lgpi
