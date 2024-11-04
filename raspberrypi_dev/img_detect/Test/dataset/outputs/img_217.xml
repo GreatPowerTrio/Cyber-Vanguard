@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+<annotation>
+<folder>captured_image_dir</folder>
+<filename>img_217.jpg</filename>
+<path>E:\Project\GreatPowerTrio\Cyber-Vanguard\raspberrypi_dev\img_detect\Test\captured_image_dir\img_217.jpg</path>
+<source>
+    <database>Unknown</database>
+</source>
+<size>
+    <width>640</width>
+    <height>480</height>
+    <depth>3</depth>
+</size>
+
+<segmented>0</segmented>
+    <object>
+    <name>6</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+        <xmin>96</xmin>
+        <ymin>222</ymin>
+        <xmax>220</xmax>
+        <ymax>370</ymax>
+    </bndbox>
+</object>
+</annotation>

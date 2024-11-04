@@ -126,7 +126,7 @@ if __name__ == '__main__':
         # 定义膨胀操作的核
         kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (5, 5))
         # 对边缘检测后的图像进行膨胀操作
-        dilated_img = cv2.dilate(edged_img, kernel, iterations=1)
+        dilated_img = cv2.dilate(edged_img, kernel, iterations=2)
         cv2.imshow("Dilated Image", dilated_img)
 
         
