@@ -11,6 +11,35 @@ parent_dir = osp.dirname(script_dir)
 img_dir = osp.join(parent_dir, 'image')
 template_dir = osp.join(img_dir, 'template_img_dir')
 
+template = cv2.imread(osp.join(template_dir, 'num_template.jpg'))
+gray_template = cv2.cvtColor(template, cv2.COLOR_BGR2GRAY)
+print('二值化模板图像已读取')
+
+# 边缘检测
+edged_template = cv2.Canny(template, 80, 200) # 边缘低阈值75和高阈值20
+
+# 轮廓检测
+template_contours, hierarchy = cv2.findContours(edged_template, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
+# 读取模板轮廓的矩形坐标
+x, y, w, h = cv2.boundingRect(template_contours[1])
+
+print(f'检测到{len(template_contours)}个轮廓')
+
+# 模板数字排序 1-8
+sorted_template_contours = [template_contours[5], template_contours[4], template_contours[1],template_contours[0], template_contours[7], template_contours[6], template_contours[3], template_contours[2]]
+
+# 构造模板字典
+digit_dict = {}
+
+# 分割模板图像
+for (i, c) in enumerate(sorted_template_contours):
+    (x, y, w, h) = cv2.boundingRect(c)
+    roi = gray_template[y+10:y+h-10, x+10:x+w-10]
+    
+    roi = cv2.resize(roi, (100, 150))
+    digit_dict[i] = roi
+
 # 暂时添加父目录到系统变量，方便引用 hardware库
 sys.path.append(parent_dir)
 import utils.hardware as hardware

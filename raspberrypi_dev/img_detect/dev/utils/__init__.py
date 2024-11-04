@@ -27,6 +27,7 @@ def main():
         return
     ascill_art(osp.join(package_dir,"img/my_avater_small.jpg"))
     
+    
 
 
 
